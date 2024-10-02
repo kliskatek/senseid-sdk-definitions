@@ -1,0 +1,95 @@
+version: 1
+date: 2024-07-29
+
+pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
+types:
+    0x0101:
+          name: fenix
+          description: Ambient Temperature Sensor
+          data_def:
+              - magnitude: Temperature
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: linear
+                coefficients: [0, 0.01]
+    0x0102:
+          name: pyros-ntc
+          description: Contact Temperature Sensor
+          data_def:
+              - magnitude: Temperature
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: thermistor-beta
+                coefficients: [3000, 10000, 25]
+    0x0103:
+          name: hygro-fenix
+          description: Ambient Humidity and Temperature Sensor
+          data_def:
+              - magnitude: Humidity
+                unit_long: RH%
+                unit_short: '%'
+                type: uint16
+                transform: linear
+                coefficients: [0, 0.01]
+              - magnitude: Temperature
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: linear
+                coefficients: [0, 0.01]
+    0x0104:
+          name: kineo
+          description: 3-Axis Accelerometer
+          data_def:
+              - magnitude: X
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Y
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Z
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+    0x0105:
+          name: magneto
+          description: 3-Axis Magnetic Field Sensor
+          data_def:
+              - magnitude: X
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Y
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Z
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+    0x0106:
+          name: spark
+          description: Battery Voltage Sensor
+          data_def:
+              - magnitude: Battery Level
+                unit_long: Volts
+                unit_short: V
+                type: uint16
+                transform: linear
+                coefficients: [0, 0.001]
