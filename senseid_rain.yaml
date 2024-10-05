@@ -4,7 +4,7 @@ date: 2024-07-29
 pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
 types:
     0x0101:
-          name: fenix
+          name: EVAL-SID-AT
           description: Ambient Temperature Sensor
           data_def:
               - magnitude: Temperature
@@ -14,7 +14,7 @@ types:
                 transform: linear
                 coefficients: [0, 0.01]
     0x0102:
-          name: pyros-ntc
+          name: EVAL-SID-CTN
           description: Contact Temperature Sensor
           data_def:
               - magnitude: Temperature
@@ -24,8 +24,8 @@ types:
                 transform: thermistor-beta
                 coefficients: [3000, 10000, 25]
     0x0103:
-          name: hygro-fenix
-          description: Ambient Humidity and Temperature Sensor
+          name: EVAL-SID-RHAT
+          description: Ambient Humidity Sensor
           data_def:
               - magnitude: Humidity
                 unit_long: RH%
@@ -40,7 +40,7 @@ types:
                 transform: linear
                 coefficients: [0, 0.01]
     0x0104:
-          name: kineo
+          name: EVAL-SID-ACC
           description: 3-Axis Accelerometer
           data_def:
               - magnitude: X
@@ -62,7 +62,7 @@ types:
                 transform: linear
                 coefficients: [0, 0.001]
     0x0105:
-          name: magneto
+          name: EVAL-SID-MGF
           description: 3-Axis Magnetic Field Sensor
           data_def:
               - magnitude: X
@@ -84,7 +84,7 @@ types:
                 transform: linear
                 coefficients: [0, 0.001]
     0x0106:
-          name: spark
+          name: EVAL-SID-BAT
           description: Battery Voltage Sensor
           data_def:
               - magnitude: Battery Level
