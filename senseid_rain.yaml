@@ -13,6 +13,7 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.01]
+          fw_versions: [1]
     0x02:
           name: EVAL-SID-ACC
           description: 3-Axis Accelerometer
@@ -35,6 +36,7 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
+          fw_versions: [1]
     0x03:
           name: EVAL-SID-MGF
           description: 3-Axis Magnetic Field Sensor
@@ -57,6 +59,7 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
+          fw_versions: [1]
     0x05:
           name: EVAL-SID-RHAT
           description: Ambient Humidity Sensor
@@ -73,6 +76,7 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.01]
+          fw_versions: [1]
     0x06:
           name: EVAL-SID-CTN
           description: Contact Temperature Sensor
@@ -83,6 +87,7 @@ types:
                 type: int16
                 transform: thermistor-beta
                 coefficients: [3000, 10000, 25]
+          fw_versions: [1]
     0x08:
           name: EVAL-SID-BAT
           description: Battery Voltage Sensor
@@ -93,3 +98,4 @@ types:
                 type: uint16
                 transform: linear
                 coefficients: [0, 0.001]
+          fw_versions: [1]
