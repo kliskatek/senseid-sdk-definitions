@@ -1,5 +1,5 @@
-version: 1
-date: 2024-07-29
+version: 2
+date: 2024-12-11
 
 pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
 types:
@@ -59,6 +59,23 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
+          fw_versions: [1]
+    0x04:
+          name: EVAL-SID-P
+          description: Pressure Sensor
+          data_def:
+              - magnitude: Pressure
+                unit_long: Bars
+                unit_short: bar
+                type: uint16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Temperature 
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]                
           fw_versions: [1]
     0x05:
           name: EVAL-SID-RHAT
