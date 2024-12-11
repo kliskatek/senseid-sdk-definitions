@@ -1,4 +1,4 @@
-version: 2
+version: 3
 date: 2024-12-11
 
 pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
@@ -75,7 +75,7 @@ types:
                 unit_short: C
                 type: int16
                 transform: linear
-                coefficients: [0, 0.001]                
+                coefficients: [0, 0.01]                
           fw_versions: [1]
     0x05:
           name: EVAL-SID-RHAT
