@@ -103,7 +103,7 @@ types:
                 unit_short: C
                 type: int16
                 transform: thermistor-beta
-                coefficients: [3000, 10000, 25]
+                coefficients: [3950, 10000, 25]
           fw_versions: [1]
     0x08:
           name: EVAL-SID-BAT
