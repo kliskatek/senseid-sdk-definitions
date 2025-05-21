@@ -1,0 +1,85 @@
+version: 1
+date: 2025-05-20
+
+local_name: 'KL'
+types:
+    0x01:
+          name: EVAL-SID-AT
+          description: Ambient Temperature Sensor
+          data_def:
+              - magnitude: Temperature
+                unit_long: Celsius
+                unit_short: C
+                type: int16be
+                transform: linear
+                coefficients: [0, 0.0078125]
+          fw_versions: [1]
+    0x02:
+          name: EVAL-SID-ACC
+          description: 3-Axis Accelerometer
+          data_def:
+              - magnitude: X
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.00006103515625]
+              - magnitude: Y
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.00006103515625]
+              - magnitude: Z
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.00006103515625]
+          fw_versions: [1]
+    0x03:
+          name: EVAL-SID-MGF
+          description: 3-Axis Magnetic Field Sensor
+          data_def:
+              - magnitude: X
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.00006103515625]
+              - magnitude: Y
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.00006103515625]
+              - magnitude: Z
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.00006103515625]
+          fw_versions: [1]
+    0x05:
+          name: EVAL-SID-RHAT
+          description: Ambient Humidity Sensor
+          data_def:
+              - magnitude: Temperature
+                unit_long: Celsius
+                unit_short: C
+                type: int16be
+                transform: linear
+                coefficients: [-45, 0.00267032883192187380788891432059]
+              - magnitude: Padding
+                unit_long: None
+                unit_short: NA
+                type: padding
+                transform: linear
+                coefficients: [0, 0]
+              - magnitude: Humidity
+                unit_long: RH%
+                unit_short: '%'
+                type: uint16be
+                transform: linear
+                coefficients: [0, 0.00152590218966964217593652246891]
+          fw_versions: [1]
