@@ -4,7 +4,7 @@ date: 2025-05-20
 local_name: 'KL'
 types:
     0x01:
-          name: EVAL-SID-AT
+          name: EVAL-SBLE-AT
           description: Ambient Temperature Sensor
           data_def:
               - magnitude: Temperature
@@ -15,7 +15,7 @@ types:
                 coefficients: [0, 0.0078125]
           fw_versions: [1]
     0x02:
-          name: EVAL-SID-ACC
+          name: EVAL-SBLE-ACC
           description: 3-Axis Accelerometer
           data_def:
               - magnitude: X
@@ -38,7 +38,7 @@ types:
                 coefficients: [0, 0.00006103515625]
           fw_versions: [1]
     0x03:
-          name: EVAL-SID-MGF
+          name: EVAL-SBLE-MGF
           description: 3-Axis Magnetic Field Sensor
           data_def:
               - magnitude: X
@@ -61,7 +61,7 @@ types:
                 coefficients: [0, 0.00006103515625]
           fw_versions: [1]
     0x05:
-          name: EVAL-SID-RHAT
+          name: EVAL-SBLE-RHAT
           description: Ambient Humidity Sensor
           data_def:
               - magnitude: Temperature
