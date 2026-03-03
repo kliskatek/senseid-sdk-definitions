@@ -1,0 +1,24 @@
+version: 1
+date: 2026-03-02
+
+default_type: 0x01
+
+types:
+    0x01:
+          name: EVAL-SNFC-RHAT
+          description: NFC Temperature & Humidity Sensor
+          data_def:
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: uint16
+                transform: linear
+                coefficients: [0, 0.01]
+              - magnitude: Humidity
+                magnitude_short: RH
+                unit_long: Percent
+                unit_short: '%'
+                type: uint16
+                transform: linear
+                coefficients: [0, 0.01]

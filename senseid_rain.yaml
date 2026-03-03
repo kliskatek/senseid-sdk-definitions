@@ -8,6 +8,7 @@ types:
           description: Ambient Temperature Sensor
           data_def:
               - magnitude: Temperature
+                magnitude_short: T
                 unit_long: Celsius
                 unit_short: C
                 type: int16
@@ -19,18 +20,21 @@ types:
           description: 3-Axis Accelerometer
           data_def:
               - magnitude: X
+                magnitude_short: X
                 unit_long: gravity
                 unit_short: g
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
               - magnitude: Y
+                magnitude_short: Y
                 unit_long: gravity
                 unit_short: g
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
               - magnitude: Z
+                magnitude_short: Z
                 unit_long: gravity
                 unit_short: g
                 type: int16
@@ -42,18 +46,21 @@ types:
           description: 3-Axis Magnetic Field Sensor
           data_def:
               - magnitude: X
+                magnitude_short: X
                 unit_long: gauss
                 unit_short: gauss
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
               - magnitude: Y
+                magnitude_short: Y
                 unit_long: gauss
                 unit_short: gauss
                 type: int16
                 transform: linear
                 coefficients: [0, 0.001]
               - magnitude: Z
+                magnitude_short: Z
                 unit_long: gauss
                 unit_short: gauss
                 type: int16
@@ -65,29 +72,33 @@ types:
           description: Pressure Sensor
           data_def:
               - magnitude: Pressure
+                magnitude_short: P
                 unit_long: Bars
                 unit_short: bar
                 type: uint16
                 transform: linear
                 coefficients: [0, 0.001]
-              - magnitude: Temperature 
+              - magnitude: Temperature
+                magnitude_short: T
                 unit_long: Celsius
                 unit_short: C
                 type: int16
                 transform: linear
-                coefficients: [0, 0.01]                
+                coefficients: [0, 0.01]
           fw_versions: [1]
     0x05:
           name: EVAL-SID-RHAT
           description: Ambient Humidity Sensor
           data_def:
               - magnitude: Humidity
+                magnitude_short: RH
                 unit_long: RH%
                 unit_short: '%'
                 type: uint16
                 transform: linear
                 coefficients: [0, 0.01]
               - magnitude: Temperature
+                magnitude_short: T
                 unit_long: Celsius
                 unit_short: C
                 type: int16
@@ -99,6 +110,7 @@ types:
           description: Contact Temperature Sensor
           data_def:
               - magnitude: Temperature
+                magnitude_short: T
                 unit_long: Celsius
                 unit_short: C
                 type: int16
@@ -110,6 +122,7 @@ types:
           description: Battery Voltage Sensor
           data_def:
               - magnitude: Battery Level
+                magnitude_short: Bat
                 unit_long: Volts
                 unit_short: V
                 type: uint16
