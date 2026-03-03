@@ -6,6 +6,8 @@ types:
     0x01:
           name: EVAL-SID-AT
           description: Ambient Temperature Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-AT-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-at-dkw/
           data_def:
               - magnitude: Temperature
                 magnitude_short: T
@@ -18,6 +20,8 @@ types:
     0x02:
           name: EVAL-SID-ACC
           description: 3-Axis Accelerometer
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-ACC-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-acc-dkw/
           data_def:
               - magnitude: X
                 magnitude_short: X
@@ -44,6 +48,8 @@ types:
     0x03:
           name: EVAL-SID-MGF
           description: 3-Axis Magnetic Field Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-MGF-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-mgf-dkw/
           data_def:
               - magnitude: X
                 magnitude_short: X
@@ -89,6 +95,8 @@ types:
     0x05:
           name: EVAL-SID-RHAT
           description: Ambient Humidity Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-RHAT-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-rhat-dkw/
           data_def:
               - magnitude: Humidity
                 magnitude_short: RH
@@ -108,6 +116,8 @@ types:
     0x06:
           name: EVAL-SID-CTN
           description: Contact Temperature Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-CTN-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-ctn-dkw/
           data_def:
               - magnitude: Temperature
                 magnitude_short: T

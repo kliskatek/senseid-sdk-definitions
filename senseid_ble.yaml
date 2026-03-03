@@ -6,6 +6,8 @@ types:
     0x01:
           name: EVAL-SBLE-AT
           description: Ambient Temperature Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-BLE-AT-1V1.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sble-at-dkw/
           data_def:
               - magnitude: Temperature
                 magnitude_short: T
@@ -18,6 +20,8 @@ types:
     0x02:
           name: EVAL-SBLE-ACC
           description: 3-Axis Accelerometer
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-BLE-ACC-1V1.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sble-acc-dkw/
           data_def:
               - magnitude: X
                 magnitude_short: X
@@ -44,6 +48,8 @@ types:
     0x03:
           name: EVAL-SBLE-MGF
           description: 3-Axis Magnetic Field Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-BLE-MGF-1V1.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sble-mgf-dkw/
           data_def:
               - magnitude: X
                 magnitude_short: X
@@ -70,6 +76,8 @@ types:
     0x05:
           name: EVAL-SBLE-RHAT
           description: Ambient Humidity Sensor
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-BLE-RHAT-1V1.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sble-rhat-dkw/
           data_def:
               - magnitude: Temperature
                 magnitude_short: T
