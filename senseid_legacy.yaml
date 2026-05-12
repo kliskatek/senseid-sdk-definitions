@@ -31,8 +31,8 @@ skip_when:
 
 types:
     0x05:
-          name: EVAL-SID-RHAT (legacy)
-          description: Ambient Humidity Sensor (legacy datagram in User memory)
+          name: EVAL-LEGACY-RHAT
+          description: Ambient Humidity Sensor (Kliskatek legacy, datagram in User memory)
           datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-RHAT-1V3.pdf
           store_url: https://www.kliskatek.com/producto/eval-sid-rhat-dkw/
           data_def:
