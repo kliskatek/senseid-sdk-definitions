@@ -169,18 +169,18 @@ types:
           fw_versions: [1]
     0x0F:
           name: Spectre-RM
-          description: Light sensor (Farsens, raw 16-bit code)
-          # Real value: 1.2 * 2^exp * frac where exp=high nibble of byte 3,
-          # frac=12 bits across bytes 2..3. Exposed here as raw uint16 — to
-          # be revisited when a dedicated transform is added.
+          description: Light sensor (Farsens)
+          # Sensor packs the reading as uint16 LE with the 4 high bits as
+          # exponent and the 12 low bits as fraction. The `ldr` transform
+          # turns that into 1.2 * 2^exp * frac (lux-like).
           data_def:
               - magnitude: Light
                 magnitude_short: L
-                unit_long: count
-                unit_short: ''
+                unit_long: Lux
+                unit_short: lx
                 type: uint16
-                transform: none
-                coefficients: []
+                transform: ldr
+                coefficients: [1.2]
           fw_versions: [1]
     0x10:
           name: Cyclon-RM
@@ -215,15 +215,17 @@ types:
           fw_versions: [1]
     0x1B:
           name: Rotor-Wt-RM
-          description: Thermistor (Farsens, raw resistance)
+          description: NTC thermistor temperature (Farsens, IRNTC10K variant)
+          # value_raw is the thermistor resistance in ohms (float32 LE);
+          # converted to °C via Steinhart-Hart simplified with β/R0/T0.
           data_def:
-              - magnitude: Resistance
-                magnitude_short: R
-                unit_long: Ohms
-                unit_short: 'Ω'
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
                 type: float
-                transform: none
-                coefficients: []
+                transform: thermistor-beta
+                coefficients: [4126, 10000, 25]
           fw_versions: [1]
     0x1C:
           name: Rotor-Wc-RM
@@ -251,13 +253,15 @@ types:
           fw_versions: [1]
     0x1E:
           name: Electra-Ct-RM
-          description: Thermistor (Farsens, raw resistance)
+          description: NTC thermistor temperature (Farsens)
+          # value_raw is the thermistor resistance in ohms (float32 LE);
+          # converted to °C via Steinhart-Hart simplified with β/R0/T0.
           data_def:
-              - magnitude: Resistance
-                magnitude_short: R
-                unit_long: Ohms
-                unit_short: 'Ω'
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
                 type: float
-                transform: none
-                coefficients: []
+                transform: thermistor-beta
+                coefficients: [3988, 10000, 25]
           fw_versions: [1]
