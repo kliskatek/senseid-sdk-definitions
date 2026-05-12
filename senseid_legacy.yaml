@@ -1,7 +1,16 @@
-version: 1
+version: 2
 date: 2026-05-12
 
 pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
+
+# EPC layout for Kliskatek legacy tags (96 bits = 12 bytes):
+#   bytes 0-4 : PEN header (above)
+#   byte  5   : type (sensor model; same namespace as senseid_rain.yaml)
+#   byte  6   : epc_family_marker = 0xFF (reserved value that distinguishes
+#               the legacy family from standard SenseID, whose byte 6 holds
+#               the firmware version 0x01..0xFE).
+#   bytes 7-11: SN (big-endian, 5 bytes -> 1.1 trillion serial numbers)
+epc_family_marker: 0xFF
 
 # Sensor payload lives in tag User memory (Rocky100 SPI buffer).
 # Reader must inventory + embedded Read on USER bank.
