@@ -1,0 +1,44 @@
+version: 1
+date: 2026-05-12
+
+pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
+
+# Sensor payload lives in tag User memory (Rocky100 SPI buffer).
+# Reader must inventory + embedded Read on USER bank.
+memory_bank: user
+word_offset: 0x100
+word_count: 3
+
+# Datagram layout (6 bytes / 3 words):
+#   byte 0   : fw_version  (uint8)
+#   bytes 1-N: sensor data, parsed per type.data_def (little-endian)
+#   last byte: QoS byte appended by R100 (ignored by sensor parsing)
+#
+# fw_version values in skip_when mean "SPI buffer not refreshed yet"
+# (R100 only arms SPI once per systick ~204ms). Parser leaves data=None
+# in those cases so the tag is still reported (read count keeps ticking).
+skip_when:
+    fw_version: [0x00, 0xFF]
+
+types:
+    0x05:
+          name: EVAL-SID-RHAT (legacy)
+          description: Ambient Humidity Sensor (legacy datagram in User memory)
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-RHAT-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-rhat-dkw/
+          data_def:
+              - magnitude: Humidity
+                magnitude_short: RH
+                unit_long: RH%
+                unit_short: '%'
+                type: uint16
+                transform: linear
+                coefficients: [0, 0.01]
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: linear
+                coefficients: [0, 0.01]
+          fw_versions: [1]
