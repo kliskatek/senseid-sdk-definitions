@@ -35,22 +35,22 @@ types:
           data_def:
               - magnitude: X
                 magnitude_short: X
-                unit_long: count
-                unit_short: ''
+                unit_long: milli-g
+                unit_short: mg
                 type: int16
                 transform: none
                 coefficients: []
               - magnitude: Y
                 magnitude_short: Y
-                unit_long: count
-                unit_short: ''
+                unit_long: milli-g
+                unit_short: mg
                 type: int16
                 transform: none
                 coefficients: []
               - magnitude: Z
                 magnitude_short: Z
-                unit_long: count
-                unit_short: ''
+                unit_long: milli-g
+                unit_short: mg
                 type: int16
                 transform: none
                 coefficients: []
@@ -135,22 +135,22 @@ types:
           data_def:
               - magnitude: X
                 magnitude_short: X
-                unit_long: count
-                unit_short: ''
+                unit_long: milli-Gauss
+                unit_short: mG
                 type: int16
                 transform: none
                 coefficients: []
               - magnitude: Y
                 magnitude_short: Y
-                unit_long: count
-                unit_short: ''
+                unit_long: milli-Gauss
+                unit_short: mG
                 type: int16
                 transform: none
                 coefficients: []
               - magnitude: Z
                 magnitude_short: Z
-                unit_long: count
-                unit_short: ''
+                unit_long: milli-Gauss
+                unit_short: mG
                 type: int16
                 transform: none
                 coefficients: []
