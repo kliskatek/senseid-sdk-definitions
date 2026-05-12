@@ -1,0 +1,263 @@
+version: 1
+date: 2026-05-12
+
+# Farsens EPC layout (10-byte prefix, read by Select with StartBit=32):
+#   byte 0    : 0x00 (header)
+#   bytes 1-4 : PEN = 00 00 A9 3C
+#   bytes 5-9 : productId (big-endian, 5 bytes)
+#   bytes 10+ : SN (factory-unique, ignored for identification)
+pen_header: [0x00, 0x00, 0x00, 0xA9, 0x3C]
+
+# All Farsens R102/R100 tags expose their SPI buffer in USER memory.
+# word_count is the *max* across all supported types so a single embedded
+# read can serve every model; per-type decoding consumes only what its
+# data_def declares. Tags that have fewer words armed in their SPI buffer
+# return garbage in the trailing words — the parser ignores it.
+memory_bank: user
+word_offset: 0x100
+word_count: 6
+
+# Datagram layout in USER memory:
+#   byte 0       : preamble (must equal 0xAA, otherwise stale/invalid)
+#   byte 1       : fw_version (uint8)
+#   bytes 2..N-2 : sensor data per type.data_def (little-endian)
+#   byte N-1     : QoS byte (overwritten by R100, ignored)
+preamble: 0xAA
+data_index: 2
+
+# productId -> sensor type. Only RM (real-time) variants are listed.
+# RML (logger) variants are out of scope (would need an extra header byte
+# at data_index=3).
+types:
+    0x02:
+          name: Kineo-RM
+          description: 3-Axis Accelerometer (Farsens)
+          data_def:
+              - magnitude: X
+                magnitude_short: X
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+              - magnitude: Y
+                magnitude_short: Y
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+              - magnitude: Z
+                magnitude_short: Z
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x03:
+          name: Rmeter-RM
+          description: Resistance meter (Farsens)
+          data_def:
+              - magnitude: Resistance
+                magnitude_short: R
+                unit_long: Ohms
+                unit_short: 'Ω'
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x06:
+          name: Fenix-Vortex-RM
+          description: Pressure + Temperature (Farsens)
+          data_def:
+              - magnitude: Pressure
+                magnitude_short: P
+                unit_long: Pascals
+                unit_short: Pa
+                type: float
+                transform: none
+                coefficients: []
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x07:
+          name: Fenix-RM
+          description: Temperature sensor (Farsens)
+          data_def:
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x08:
+          name: Hygro-Fenix-RM
+          description: Humidity + Temperature (Farsens)
+          data_def:
+              - magnitude: Humidity
+                magnitude_short: RH
+                unit_long: RH%
+                unit_short: '%'
+                type: float
+                transform: none
+                coefficients: []
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x0B:
+          name: Medusa-RM
+          description: Factory default ADC (Farsens)
+          data_def:
+              - magnitude: ADC
+                magnitude_short: ADC
+                unit_long: count
+                unit_short: ''
+                type: uint16
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x0D:
+          name: Magneto-RM
+          description: 3-Axis Magnetic Field (Farsens)
+          data_def:
+              - magnitude: X
+                magnitude_short: X
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+              - magnitude: Y
+                magnitude_short: Y
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+              - magnitude: Z
+                magnitude_short: Z
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x0E:
+          name: Cmeter-RM
+          description: Capacitance meter (Farsens)
+          data_def:
+              - magnitude: Capacitance
+                magnitude_short: C
+                unit_long: Farads
+                unit_short: F
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x0F:
+          name: Spectre-RM
+          description: Light sensor (Farsens, raw 16-bit code)
+          # Real value: 1.2 * 2^exp * frac where exp=high nibble of byte 3,
+          # frac=12 bits across bytes 2..3. Exposed here as raw uint16 — to
+          # be revisited when a dedicated transform is added.
+          data_def:
+              - magnitude: Light
+                magnitude_short: L
+                unit_long: count
+                unit_short: ''
+                type: uint16
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x10:
+          name: Cyclon-RM
+          description: Pressure + Temperature (Farsens)
+          data_def:
+              - magnitude: Pressure
+                magnitude_short: P
+                unit_long: Pascals
+                unit_short: Pa
+                type: float
+                transform: none
+                coefficients: []
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x11:
+          name: Zygos-RM
+          description: Load cell (Farsens)
+          data_def:
+              - magnitude: Weight
+                magnitude_short: W
+                unit_long: count
+                unit_short: ''
+                type: int16
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x1B:
+          name: Rotor-Wt-RM
+          description: Thermistor (Farsens, raw resistance)
+          data_def:
+              - magnitude: Resistance
+                magnitude_short: R
+                unit_long: Ohms
+                unit_short: 'Ω'
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x1C:
+          name: Rotor-Wc-RM
+          description: Current sensor (Farsens)
+          data_def:
+              - magnitude: Current
+                magnitude_short: I
+                unit_long: Amperes
+                unit_short: A
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x1D:
+          name: Rotor-Wv-RM
+          description: Voltage sensor (Farsens)
+          data_def:
+              - magnitude: Voltage
+                magnitude_short: V
+                unit_long: Volts
+                unit_short: V
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
+    0x1E:
+          name: Electra-Ct-RM
+          description: Thermistor (Farsens, raw resistance)
+          data_def:
+              - magnitude: Resistance
+                magnitude_short: R
+                unit_long: Ohms
+                unit_short: 'Ω'
+                type: float
+                transform: none
+                coefficients: []
+          fw_versions: [1]
