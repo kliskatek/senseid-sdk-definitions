@@ -43,6 +43,7 @@ types:
                 type: uint16
                 transform: linear
                 coefficients: [0, 0.01]
+                valid_range: [0, 100]
               - magnitude: Temperature
                 magnitude_short: T
                 unit_long: Celsius
@@ -50,4 +51,5 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.01]
+                valid_range: [-40, 125]
           fw_versions: [1]
