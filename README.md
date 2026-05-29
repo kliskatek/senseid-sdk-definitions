@@ -7,14 +7,14 @@ and decode their sensor payload.
 | File | Tag family | Identifier | Sensor data lives in |
 |------|-----------|-----------|----------------------|
 | [`senseid_rain.yaml`](senseid_rain.yaml) | SenseID RAIN UHF | PEN `00 00 00 F1 D3`, byte 6 ∈ `0x01..0xFE` | EPC |
-| [`senseid_legacy.yaml`](senseid_legacy.yaml) | SenseID legacy (Kliskatek) | PEN `00 00 00 F1 D3`, byte 6 = `0xFF` | User memory (USER bank, word `0x100`) |
+| [`senseid_senseread.yaml`](senseid_senseread.yaml) | SenseID senseRead (Kliskatek) | PEN `00 00 00 F1 D3`, byte 6 = `0xFF` | User memory (USER bank, word `0x100`) |
 | [`senseid_farsens.yaml`](senseid_farsens.yaml) | Farsens RM family | PEN `00 00 A9 3C` (after a leading `0x00` header byte) | User memory (USER bank, word `0x100`) |
 | [`senseid_ble.yaml`](senseid_ble.yaml) | SenseID BLE | Manufacturer-data PEN | BLE advertisement |
 | [`senseid_nfc.yaml`](senseid_nfc.yaml) | SenseID NFC | NTAG type config | NDEF / NFC bulk read |
 
 ## RAIN UHF families share the same PEN
 
-Both standard SenseID RAIN and the Kliskatek legacy line use the same PEN
+Both standard SenseID RAIN and the Kliskatek senseRead line use the same PEN
 header (`00 00 00 F1 D3`) and the same `type` namespace, so the byte
 immediately after the type is used as a **family marker** to tell them apart:
 
@@ -24,13 +24,13 @@ immediately after the type is used as a **family marker** to tell them apart:
 [1 B] family marker:
         0x01..0xFE  -> standard SenseID (this byte is the real fw_version,
                       followed by 3 bytes of SN and 4 bytes of sensor data)
-        0xFF        -> Kliskatek legacy (followed by 5 bytes of SN; the
+        0xFF        -> Kliskatek senseRead (followed by 5 bytes of SN; the
                       sensor data lives in User memory instead of the EPC)
 […] tail per family
 ```
 
 Parsers MUST refuse to decode a SenseID-PEN EPC whose byte 6 is `0xFF` as
-standard SenseID, and conversely a legacy parser MUST require byte 6 ==
+standard SenseID, and conversely a senseRead parser MUST require byte 6 ==
 `0xFF` to accept it.
 
 ## YAML schema
@@ -44,7 +44,7 @@ Common fields:
   least `name`, `description`, `data_def` (list of channels) and
   `fw_versions` (firmwares known to fit this layout).
 
-Family-specific fields used by `senseid_legacy.yaml` and
+Family-specific fields used by `senseid_senseread.yaml` and
 `senseid_farsens.yaml`:
 
 - `memory_bank`, `word_offset`, `word_count` — where the reader must
@@ -54,11 +54,11 @@ Family-specific fields used by `senseid_legacy.yaml` and
   reading must be discarded.
 - `data_index` *(Farsens only)* — byte offset where the sensor data starts
   inside the User-memory datagram.
-- `epc_family_marker` *(legacy only)* — byte 6 of the EPC that distinguishes
-  legacy from standard SenseID (`0xFF`). Legacy and standard SenseID share the
-  same `type` numbering (e.g. `0x05` = RHAT for both); byte 6 is the only
+- `epc_family_marker` *(senseRead only)* — byte 6 of the EPC that distinguishes
+  senseRead from standard SenseID (`0xFF`). senseRead and standard SenseID share
+  the same `type` numbering (e.g. `0x05` = RHAT for both); byte 6 is the only
   discriminator.
-- `skip_when` *(legacy only)* — datagram-level conditions that should
+- `skip_when` *(senseRead only)* — datagram-level conditions that should
   produce `data=None` (e.g. `fw_version: [0x00, 0xFF]` for stale samples).
 
 ## Sensor data channel (`data_def` entry)
