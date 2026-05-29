@@ -1,16 +1,25 @@
-version: 2
-date: 2026-05-12
+version: 4
+date: 2026-05-28
 
 pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
 
+# Legacy tags share the SenseID PEN header AND type numbering with standard
+# SenseID (e.g. 0x05 = RHAT for both). They are told apart by the family marker
+# at byte 6: a legacy tag carries 0xFF there, a standard SenseID tag carries a
+# real fw_version.
+epc_family_marker: 0xFF
+
 # EPC layout for Kliskatek legacy tags (96 bits = 12 bytes):
 #   bytes 0-4 : PEN header (above)
-#   byte  5   : type (sensor model; same namespace as senseid_rain.yaml)
-#   byte  6   : epc_family_marker = 0xFF (reserved value that distinguishes
-#               the legacy family from standard SenseID, whose byte 6 holds
-#               the firmware version 0x01..0xFE).
-#   bytes 7-11: SN (big-endian, 5 bytes -> 1.1 trillion serial numbers)
-epc_family_marker: 0xFF
+#   byte  5   : type        (same numbering as senseid_rain.yaml; 0x05 = RHAT)
+#   byte  6   : epc_family_marker (0xFF marks the tag as legacy; standard SenseID
+#               carries a real fw_version here. The real firmware version of a
+#               legacy tag lives in the User-memory datagram instead.)
+#   bytes 7-11: SN          (big-endian, 5 bytes -> 1.1 trillion serial numbers)
+#
+# A legacy tag is identified by PEN + byte-6 == epc_family_marker. The `type`
+# byte then selects the product below. Unknown types are reported as
+# "Unknown legacy type".
 
 # Sensor payload lives in tag User memory (Rocky100 SPI buffer).
 # Reader must inventory + embedded Read on USER bank.

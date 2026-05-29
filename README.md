@@ -55,7 +55,9 @@ Family-specific fields used by `senseid_legacy.yaml` and
 - `data_index` *(Farsens only)* — byte offset where the sensor data starts
   inside the User-memory datagram.
 - `epc_family_marker` *(legacy only)* — byte 6 of the EPC that distinguishes
-  legacy from standard SenseID (currently `0xFF`).
+  legacy from standard SenseID (`0xFF`). Legacy and standard SenseID share the
+  same `type` numbering (e.g. `0x05` = RHAT for both); byte 6 is the only
+  discriminator.
 - `skip_when` *(legacy only)* — datagram-level conditions that should
   produce `data=None` (e.g. `fw_version: [0x00, 0xFF]` for stale samples).
 
