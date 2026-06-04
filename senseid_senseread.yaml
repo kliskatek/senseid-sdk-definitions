@@ -25,11 +25,13 @@ epc_family_marker: 0xFF
 # Reader must inventory + embedded Read on USER bank.
 memory_bank: user
 word_offset: 0x100
-# Read 4 words = 8 bytes: enough for the largest datagram (3-axis sensors:
-# FW + X(2) + Y(2) + Z(2) + QoS = 8 bytes). Smaller payloads ignore the
-# trailing bytes; the QoS byte still lands at the end of whatever the
-# tag actually wrote.
-word_count: 4
+# Keep at 3 words = 6 bytes to match LEGACY_DATAGRAM_SIZE in the firmware
+# (drivers/r100_legacy.h). The R700 NAKs reads that overrun the tag's
+# exposed buffer and then starves other tags in a retry loop, so this
+# must stay aligned with the firmware-side buffer size. ACC/MGF (8-byte
+# datagrams) need a firmware update first; until then they parse with
+# the trailing axes/QoS missing.
+word_count: 3
 
 # Datagram layout (6 bytes / 3 words):
 #   byte 0   : fw_version  (uint8)
