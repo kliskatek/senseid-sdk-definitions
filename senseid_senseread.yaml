@@ -1,5 +1,5 @@
-version: 5
-date: 2026-05-29
+version: 6
+date: 2026-06-04
 
 pen_header: [0x00, 0x00, 0x00, 0xF1, 0xD3]
 
@@ -25,7 +25,11 @@ epc_family_marker: 0xFF
 # Reader must inventory + embedded Read on USER bank.
 memory_bank: user
 word_offset: 0x100
-word_count: 3
+# Read 4 words = 8 bytes: enough for the largest datagram (3-axis sensors:
+# FW + X(2) + Y(2) + Z(2) + QoS = 8 bytes). Smaller payloads ignore the
+# trailing bytes; the QoS byte still lands at the end of whatever the
+# tag actually wrote.
+word_count: 4
 
 # Datagram layout (6 bytes / 3 words):
 #   byte 0   : fw_version  (uint8)
@@ -39,6 +43,77 @@ skip_when:
     fw_version: [0x00, 0xFF]
 
 types:
+    0x01:
+          name: EVAL-SREAD-AT
+          description: Ambient Temperature Sensor (Kliskatek senseRead, datagram in User memory)
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-AT-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-at-dkw/
+          data_def:
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: linear
+                coefficients: [0, 0.01]
+                valid_range: [-40, 125]
+          fw_versions: [1]
+    0x02:
+          name: EVAL-SREAD-ACC
+          description: 3-Axis Accelerometer (Kliskatek senseRead, datagram in User memory)
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-ACC-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-acc-dkw/
+          data_def:
+              - magnitude: X
+                magnitude_short: X
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Y
+                magnitude_short: Y
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Z
+                magnitude_short: Z
+                unit_long: gravity
+                unit_short: g
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+          fw_versions: [1]
+    0x03:
+          name: EVAL-SREAD-MGF
+          description: 3-Axis Magnetic Field Sensor (Kliskatek senseRead, datagram in User memory)
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-MGF-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-mgf-dkw/
+          data_def:
+              - magnitude: X
+                magnitude_short: X
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Y
+                magnitude_short: Y
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+              - magnitude: Z
+                magnitude_short: Z
+                unit_long: gauss
+                unit_short: gauss
+                type: int16
+                transform: linear
+                coefficients: [0, 0.001]
+          fw_versions: [1]
     0x05:
           name: EVAL-SREAD-RHAT
           description: Ambient Humidity Sensor (Kliskatek senseRead, datagram in User memory)
@@ -61,4 +136,18 @@ types:
                 transform: linear
                 coefficients: [0, 0.01]
                 valid_range: [-40, 125]
+          fw_versions: [1]
+    0x06:
+          name: EVAL-SREAD-CTN
+          description: Contact Temperature Sensor (Kliskatek senseRead, datagram in User memory)
+          datasheet_url: https://www.kliskatek.com/wp-content/uploads/2025/02/DS-EVAL-SID-CTN-1V3.pdf
+          store_url: https://www.kliskatek.com/producto/eval-sid-ctn-dkw/
+          data_def:
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: int16
+                transform: thermistor-beta
+                coefficients: [3950, 10000, 25]
           fw_versions: [1]
