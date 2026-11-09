@@ -57,21 +57,21 @@ types:
                 unit_short: gauss
                 type: int16
                 transform: linear
-                coefficients: [0, 0.00006103515625]
+                coefficients: [0, 0.0015]
               - magnitude: Y
                 magnitude_short: Y
                 unit_long: gauss
                 unit_short: gauss
                 type: int16
                 transform: linear
-                coefficients: [0, 0.00006103515625]
+                coefficients: [0, 0.0015]
               - magnitude: Z
                 magnitude_short: Z
                 unit_long: gauss
                 unit_short: gauss
                 type: int16
                 transform: linear
-                coefficients: [0, 0.00006103515625]
+                coefficients: [0, 0.0015]
           fw_versions: [1]
     0x05:
           name: EVAL-SBLE-RHAT
@@ -83,7 +83,7 @@ types:
                 magnitude_short: T
                 unit_long: Celsius
                 unit_short: C
-                type: int16be
+                type: uint16be
                 transform: linear
                 coefficients: [-45, 0.00267032883192187380788891432059]
               - magnitude: Padding
@@ -100,4 +100,16 @@ types:
                 type: uint16be
                 transform: linear
                 coefficients: [0, 0.00152590218966964217593652246891]
+          fw_versions: [1]
+    0x06:
+          name: EVAL-SBLE-CTN
+          description: Contact Temperature Sensor
+          data_def:
+              - magnitude: Temperature
+                magnitude_short: T
+                unit_long: Celsius
+                unit_short: C
+                type: uint16
+                transform: thermistor-beta
+                coefficients: [3950, 10000, 25]
           fw_versions: [1]
