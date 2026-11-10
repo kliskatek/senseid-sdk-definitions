@@ -16,7 +16,7 @@ types:
                 type: int16be
                 transform: linear
                 coefficients: [0, 0.0078125]
-          fw_versions: [1]
+          fw_versions: [2]
     0x02:
           name: EVAL-SBLE-ACC
           description: 3-Axis Accelerometer
@@ -44,7 +44,7 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.00006103515625]
-          fw_versions: [1]
+          fw_versions: [2]
     0x03:
           name: EVAL-SBLE-MGF
           description: 3-Axis Magnetic Field Sensor
@@ -72,7 +72,7 @@ types:
                 type: int16
                 transform: linear
                 coefficients: [0, 0.0015]
-          fw_versions: [1]
+          fw_versions: [2]
     0x05:
           name: EVAL-SBLE-RHAT
           description: Ambient Humidity Sensor
@@ -86,13 +86,6 @@ types:
                 type: uint16be
                 transform: linear
                 coefficients: [-45, 0.00267032883192187380788891432059]
-              - magnitude: Padding
-                magnitude_short: '-'
-                unit_long: None
-                unit_short: NA
-                type: padding
-                transform: linear
-                coefficients: [0, 0]
               - magnitude: Humidity
                 magnitude_short: RH
                 unit_long: RH%
@@ -100,25 +93,7 @@ types:
                 type: uint16be
                 transform: linear
                 coefficients: [0, 0.00152590218966964217593652246891]
-          fw_versions: [1, 2]
-          # v1: the IN100 reads the SHTC3 by itself and sends its first 5 bytes, CRC of T included.
-          # v2 (rev 3.0, MSPM0): 4 bytes, T and RH without the CRC.
-          data_def_versions:
-              2:
-                  - magnitude: Temperature
-                    magnitude_short: T
-                    unit_long: Celsius
-                    unit_short: C
-                    type: uint16be
-                    transform: linear
-                    coefficients: [-45, 0.00267032883192187380788891432059]
-                  - magnitude: Humidity
-                    magnitude_short: RH
-                    unit_long: RH%
-                    unit_short: '%'
-                    type: uint16be
-                    transform: linear
-                    coefficients: [0, 0.00152590218966964217593652246891]
+          fw_versions: [2]
     0x06:
           name: EVAL-SBLE-CTN
           description: Contact Temperature Sensor
@@ -130,4 +105,4 @@ types:
                 type: uint16
                 transform: thermistor-beta
                 coefficients: [3950, 10000, 25]
-          fw_versions: [1]
+          fw_versions: [2]
