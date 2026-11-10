@@ -44,6 +44,14 @@ Common fields:
   least `name`, `description`, `data_def` (list of channels) and
   `fw_versions` (firmwares known to fit this layout).
 
+BLE only (`senseid_ble.yaml`): the manufacturer data is `ffff` + `type` +
+`fw_version` + sensor data, and the parser picks the layout by `fw_version`:
+
+- `data_def_versions` *(optional)* — dictionary keyed by `fw_version` with the
+  `data_def` of the versions whose payload differs from the default one.
+  Versions not listed use `data_def`. Example: RHAT (`0x05`) v1 carries the
+  first 5 bytes of the SHTC3 (CRC of T in the middle), v2 only T and RH.
+
 Family-specific fields used by `senseid_senseread.yaml` and
 `senseid_farsens.yaml`:
 
