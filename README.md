@@ -47,7 +47,9 @@ Common fields:
 BLE only (`senseid_ble.yaml`): the manufacturer data is `ffff` + `type` +
 `fw_version` + sensor data. All the BLE types are at `fw_version` 2 (rev 3.0
 firmware, MSPM0 + IN100); the v1 beacons, in which the IN100 read the sensor by
-itself, are no longer described.
+itself, are no longer described. `min_fw_version` (top level, 2) makes the parser
+refuse to decode any beacon with a lower `fw_version`: the tag is reported with
+its type name and `data=None`.
 
 Family-specific fields used by `senseid_senseread.yaml` and
 `senseid_farsens.yaml`:
